@@ -1,7 +1,7 @@
 var intervalId;
 var timeoutId;
 var time;
-var questions = ["Primera", "Segunda", "Tercera"];
+var questions = ["First", "Second", "Last"];
 var asnwer1 = ["resp1", "resp2", "resp3", "resp4"];
 var correctAnswer1 = "resp3";
 // var questions2 = "Segunda pregunta";
@@ -10,7 +10,7 @@ var correctAnswer2 = "Segunda1";
 // var questions3 = "Tercera pregunta";
 var asnwer3 = ["Tercera1", "Tercera2", "Tercera3", "Tercera4"];
 // var correctAnswer3 = "Tercera4";
-var questionCounter = 0;
+var questionCounter = 1;
 var wins = 0;
 var losses = 0;
 var none = 0;
@@ -50,25 +50,28 @@ function decrement() {
     if (time === 0) {
         alert("Time's Up!");
         stop();
-        displayCorrectAnswer();    
+        displayCorrectAnswer();
+        questionCounter++
     }
 }
 
 function displayCorrectAnswer() {
     $("#question").html("Respuesta");
     clear();
+    console.log(questionCounter);
     timeoutId = setTimeout(displayQuestion, 1000 * 2);
-    questionCounter++
     none++
-    console.log(none);
+    if (questionCounter === 4) {
+        $("#question").html("Respuesta");
+        clear();
+        showResults();
+        resetVar();
+
+    }
+
 }
 
-// if (questionCounter > 3) {
-//     showResults();
-//     resetVar();
-// }
 // displayQuestion();
-
 
 function showResults() {
 
