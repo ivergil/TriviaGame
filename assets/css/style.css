@@ -1,0 +1,23 @@
+body{
+    background: url(../images/adFBEK.jpg);
+}
+h4{
+    font-size: 60px;
+    color: #05c705;
+    font-family: 'ZCOOL KuaiLe', cursive;
+}
+.container{
+    width: 900px;
+}
+p{
+    font-size: 30px;
+    color: blue;
+}
+button{
+    width: 100px;
+    margin-left: 20px;
+    margin-bottom: 20px; 
+}
+.card{
+    width: 100%;
+}
