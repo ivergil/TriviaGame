@@ -18,6 +18,24 @@ button{
     margin-left: 20px;
     margin-bottom: 20px; 
 }
-.card{
-    width: 100%;
-}
+/* var trivia = [{
+    question: "Question NUMBER 1",
+    choice: ["Answ1", "Answ2", "Answ3", "Answ4"],
+    goodAnswer: "Answ2",
+},
+{
+    question: "Number 2",
+    choice: ["222", "333", "444", "555"],
+    goodAnswer: "333",
+},
+{
+    question: "Numero 3",
+    choice: ["aaa", "bbb", "ccc", "ddd"],
+    goodAnswer: "ccc",
+},
+{
+    question: "Number 4",
+    choice: ["fff", "ggg", "hhh", "jjj"],
+    goodAnswer: "jjj",
+},
+]; */

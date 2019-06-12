@@ -1,20 +1,33 @@
 var intervalId;
 var timeoutId;
 var time;
-var questions = ["First", "Second", "Last"];
-var asnwer1 = ["resp1", "resp2", "resp3", "resp4"];
-var correctAnswer1 = "resp3";
-// var questions2 = "Segunda pregunta";
-var asnwer2 = ["Segunda1", "Segunda2", "Segunda3", "Segunda4"];
-var correctAnswer2 = "Segunda1";
-// var questions3 = "Tercera pregunta";
-var asnwer3 = ["Tercera1", "Tercera2", "Tercera3", "Tercera4"];
-// var correctAnswer3 = "Tercera4";
-var questionCounter = 1;
+var trivia = [{
+    question: "1111111111",
+    choice: ["Answ1", "Answ2", "Answ3", "Answ4"],
+    goodAnswer: "Answ2",
+},
+{
+    question: "2222222222",
+    choice: ["222", "333", "444", "555"],
+    goodAnswer: "333",
+},
+{
+    question: "33333333333",
+    choice: ["aaa", "bbb", "ccc", "ddd"],
+    goodAnswer: "ccc",
+},
+    // {
+    //     question: "Number 4",
+    //     choice: ["fff", "ggg", "hhh", "jjj"],
+    //     goodAnswer: "jjj",
+    // },
+];
+var questionCounter = 0;
 var wins = 0;
 var losses = 0;
 var none = 0;
 var userAnswer = false;
+
 
 $(".btn").on("click", function () {
     start();
@@ -27,20 +40,12 @@ function clearBtn() {
 function start() {
     initTime();
     runInterval();
-    showFirstQuestion();
-    // displayQuestion();
+    displayQuestion();
     $("#start-over").html("");
 }
 function runInterval() {
     clearInterval(intervalId);
     intervalId = setInterval(decrement, 1000);
-}
-function showFirstQuestion() {
-    $("#question").html("Primera Pregunta");
-    $("#opt1").html(" P1");
-    $("#opt2").html(" P2");
-    $("#opt3").html(" P3");
-    $("#opt4").html(" P4");
 }
 
 function decrement() {
@@ -50,32 +55,32 @@ function decrement() {
     if (time === 0) {
         alert("Time's Up!");
         stop();
+        none++
         displayCorrectAnswer();
-        questionCounter++
     }
 }
 
 function displayCorrectAnswer() {
-    $("#question").html("Respuesta");
+    $("#question").html("Correct Answer: " + trivia[questionCounter].goodAnswer);
+    questionCounter++;
     clear();
-    console.log(questionCounter);
     timeoutId = setTimeout(displayQuestion, 1000 * 2);
-    none++
-    if (questionCounter === 4) {
-        $("#question").html("Respuesta");
+
+    if (questionCounter > 2) {
+        questionCounter--;
         clear();
         showResults();
         resetVar();
-
     }
-
 }
+
+
 
 // displayQuestion();
 
 function showResults() {
-
-    $("#question").html("All done, here's how you did!");
+    $("#question").html("Correct Answer: " + trivia[questionCounter].goodAnswer + "<hr>");
+    $("#question").append("<div>" + "All done, here's how you did!" + "</div>");
     $("#opt1").html("Correct Answer: " + wins);
     $("#opt2").html("Incorrect Answer: " + losses);
     $("#opt3").html("Unanswered: " + none);
@@ -89,15 +94,14 @@ function showResults() {
 
 function displayQuestion() {
     // start();
-    for (var j = 0; j < questionCounter; j++) {
-        $("#question").html(questions[j]);
-        clear();
-        for (var i = 0; i < 4; i++) {
-            $("#opt1").append("<div>" + asnwer1[i] + "</div>");
-            // $("#opt1").append("<div>" + asnwer2[i] + "</div>");
-            // $("#opt1").append("<div>" + asnwer2[i] + "</div>");
-            // $("#opt1").append("<div>" + asnwer2[3] + "</div>");
-        }
+
+    $("#question").html(trivia[questionCounter].question + "<hr>");
+    clear();
+    for (var i = 0; i < 4; i++) {
+        $("#opt1").append("<div>" + trivia[questionCounter].choice[i] + "</div>");
+        // $("#opt1").append("<div>" + asnwer2[i] + "</div>");
+        // $("#opt1").append("<div>" + asnwer2[i] + "</div>");
+        // $("#opt1").append("<div>" + asnwer2[3] + "</div>");
     }
     stop();
     initTime();
