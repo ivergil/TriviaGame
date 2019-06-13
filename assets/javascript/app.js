@@ -22,7 +22,7 @@ var trivia = [{
     goodAnswer: "Serena Williams",
 },
 ];
-var questionCounter = -1;
+var questionCounter = 0;
 var wins = 0;
 var losses = 0;
 var none = 0;
@@ -55,28 +55,30 @@ function decrement() {
         alert("Time's Up!");
         stop();
         none++
+        questionCounter++;
         displayCorrectAnswer();
     }
 }
 
 function displayCorrectAnswer() {
-    if (questionCounter === 4) {
-        questionCounter--
+    if (questionCounter > 3) {
+        // questionCounter--
         clear();
         showResults();
         resetVar();
     } else {
-        debugger;
+        // debugger;
         $("#question").html("Correct Answer: " + trivia[questionCounter].goodAnswer);
         clear();
         stop();
-        questionCounter++
+        // questionCounter++
         // debugger
-        timeoutId = setTimeout(displayQuestion, 1000 * 2);
+        timeoutId = setTimeout(displayQuestion, 1000 * 6);
     }
 }
 
 function showResults() {
+    questionCounter--;
     $("#question").html("Correct Answer: " + trivia[questionCounter].goodAnswer + "<hr>");
     $("#question").append("<div>" + "All done, here's how you did!" + "</div>");
     clear();
@@ -94,10 +96,11 @@ function showResults() {
 }
 
 function displayQuestion() {
-    questionCounter++;
-    if (questionCounter === 4) {
-
-        questionCounter--
+    // questionCounter++;
+    if (questionCounter > 3) {
+        console.log(questionCounter);
+        // questionCounter--
+        console.log(questionCounter);
         initTime();
         stop();
         showResults();
@@ -113,7 +116,7 @@ function displayQuestion() {
         runInterval();
         
     }
-
+    
 }
 
 $("#opt1").on("click", function (e) {
@@ -123,12 +126,14 @@ $("#opt1").on("click", function (e) {
     if (currentChoice === good) {
         wins++;
     } else {
+        displayCorrectAnswer();
         losses++;
+        
     }
     stop();
     // initTime();
     // runInterval();
-    // questionCounter++
+    questionCounter++
     displayQuestion();
 });
 $("#opt2").on("click", function (e) {
@@ -139,13 +144,14 @@ $("#opt2").on("click", function (e) {
         wins++;
 
     } else {
+        displayCorrectAnswer();
         losses++;
 
     }
     stop();
     // initTime();
     // runInterval();
-    // questionCounter++
+    questionCounter++
     displayQuestion();
 });
 $("#opt3").on("click", function (e) {
@@ -156,13 +162,14 @@ $("#opt3").on("click", function (e) {
         wins++;
 
     } else {
+        displayCorrectAnswer();
         losses++;
         
     }
     stop();
     // initTime();
     // runInterval();
-    // questionCounter++
+    questionCounter++
     displayQuestion();
 });
 $("#opt4").on("click", function (e) {
@@ -173,6 +180,7 @@ $("#opt4").on("click", function (e) {
         wins++;
 
     } else {
+        displayCorrectAnswer();
         losses++;
         
         // displayCorrectAnswer();
@@ -181,7 +189,7 @@ $("#opt4").on("click", function (e) {
     stop();
     // initTime();
     // runInterval();
-    // questionCounter++
+    questionCounter++
     displayQuestion();
 });
 
@@ -192,7 +200,7 @@ function runInterval() {
 }
 
 function initTime() {
-    time = 5;
+    time = 10;
     $("#timeLeft").html(time);
 }
 
@@ -205,7 +213,7 @@ function clear() {
 
 function stop() {
     clearInterval(intervalId);
-    clearTimeout(timeoutId);
+    clearTimeout(timeoutId);    
 }
 
 function resetVar() {
